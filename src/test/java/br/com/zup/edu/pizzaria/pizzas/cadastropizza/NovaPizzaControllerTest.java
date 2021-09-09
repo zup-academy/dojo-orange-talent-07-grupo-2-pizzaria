@@ -2,7 +2,6 @@ package br.com.zup.edu.pizzaria.pizzas.cadastropizza;
 
 import br.com.zup.edu.pizzaria.ingredientes.Ingrediente;
 import br.com.zup.edu.pizzaria.ingredientes.IngredienteRepository;
-import br.com.zup.edu.pizzaria.ingredientes.cadastrodeingredientes.NovoIngredienteRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-@DataJpaTest
 class NovaPizzaControllerTest {
 
     @Autowired
@@ -33,7 +31,7 @@ class NovaPizzaControllerTest {
     private IngredienteRepository ingredienteRepository;
 
     @Test
-    void deveCadastrarNovoIngrediente() throws Exception {
+    void deveCadastrarNovaPìzza() throws Exception {
 
         Ingrediente ingrediente = new Ingrediente("Queijo muçarela", 200, new BigDecimal("2.0"));
         ingredienteRepository.save(ingrediente);
