@@ -1,0 +1,46 @@
+package br.com.zup.edu.pizzaria.pizzas.cadastropizza;
+
+import br.com.zup.edu.pizzaria.ingredientes.IngredienteRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+
+import javax.transaction.Transactional;
+import java.util.Arrays;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+@SpringBootTest
+@AutoConfigureMockMvc
+@Transactional
+@DataJpaTest
+class NovaPizzaControllerTest {
+
+    @Autowired
+    private MockMvc mvc;
+
+    @Autowired
+    private IngredienteRepository ingredienteRepository;
+
+    @Test
+    void deveCadastrarNovoIngrediente() throws Exception {
+
+        NovaPizzaRequest body = new NovaPizzaRequest("Muçarela", Arrays.asList());
+        MockHttpServletRequestBuilder request = post("/api/ingredientes")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsString(body));
+
+        mvc.perform(request)
+                .andExpect(status().isCreated())
+                .andExpect(header().exists("Location"))
+                .andExpect(redirectedUrlPattern("/api/ingredientes/**"));
+
+    }
+}

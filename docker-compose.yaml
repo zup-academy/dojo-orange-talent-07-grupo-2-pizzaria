@@ -5,5 +5,6 @@ services:
     ports:
       - 5432:5432
     environment:
+#      POSTGRES_USERNAME: teste
       POSTGRES_PASSWORD: changeme
       POSTGRES_DB: pizzaria
