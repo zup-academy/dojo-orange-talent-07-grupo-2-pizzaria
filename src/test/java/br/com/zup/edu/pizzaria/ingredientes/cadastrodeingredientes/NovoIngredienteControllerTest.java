@@ -1,5 +1,6 @@
 package br.com.zup.edu.pizzaria.ingredientes.cadastrodeingredientes;
 
+import br.com.zup.edu.pizzaria.ingredientes.Ingrediente;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -43,7 +44,7 @@ class NovoIngredienteControllerTest {
         mvc.perform(request)
            .andExpect(status().isCreated())
            .andExpect(header().exists("Location"))
-                .andExpect(redirectedUrlPattern("/api/ingredientes/\\d"));
+                .andExpect(redirectedUrlPattern("/api/ingredientes/**"));
 
     }
 }
